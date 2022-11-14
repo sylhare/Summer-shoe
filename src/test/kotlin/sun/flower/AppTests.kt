@@ -1,6 +1,7 @@
 package sun.flower
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Value
@@ -32,6 +33,21 @@ internal class AppTests {
             Void::class.java)
 
         Assertions.assertEquals(HttpStatus.OK, result.statusCode)
+    }
+
+
+    @Nested
+    inner class Controller {
+        @Test
+        fun infoTest() {
+            val result = testRestTemplate.exchange(
+                URI(applicationUrl() + "/v1/info"),
+                HttpMethod.GET,
+                HttpEntity(""),
+                Info::class.java)
+
+            Assertions.assertEquals(HttpStatus.OK, result.statusCode)
+        }
     }
 
     private fun applicationUrl() = "http://localhost:$applicationPort"
