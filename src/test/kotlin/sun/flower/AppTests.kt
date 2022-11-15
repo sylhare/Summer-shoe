@@ -1,5 +1,6 @@
 package sun.flower
 
+import KGenericContainer
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
@@ -12,11 +13,23 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.testcontainers.containers.GenericContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import java.net.URI
 
+
+@Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension::class)
 internal class AppTests {
+
+    companion object {
+        @Container
+        var memcached: GenericContainer<*> = KGenericContainer("memcached:1.6.17-bullseye")
+            .withExposedPorts(11211)
+            .withAccessToHost(true)
+    }
 
     @Value("\${local.server.port}")
     var applicationPort: Int = 0
@@ -24,15 +37,25 @@ internal class AppTests {
     var testRestTemplate = TestRestTemplate()
 
     @Test
-    fun healthTest() {
-        println(applicationPort)
-        val result: ResponseEntity<Void> = testRestTemplate.exchange(
-            URI(applicationUrl() + "/actuator/health"),
-            HttpMethod.GET,
-            HttpEntity(""),
-            Void::class.java)
+    fun setupTest() {
+        Assertions.assertTrue(memcached.isRunning)
+    }
 
-        Assertions.assertEquals(HttpStatus.OK, result.statusCode)
+    @Nested
+    inner class Metrics {
+
+        @Test
+        fun healthTest() {
+            println(applicationPort)
+            val result: ResponseEntity<Void> = testRestTemplate.exchange(
+                URI(applicationUrl() + "/actuator/health"),
+                HttpMethod.GET,
+                HttpEntity(""),
+                Void::class.java
+            )
+
+            Assertions.assertEquals(HttpStatus.OK, result.statusCode)
+        }
     }
 
 
