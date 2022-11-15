@@ -1,2 +1,5 @@
 server:
   port: 8080
+
+memcached:
+  servers: localhost:11211

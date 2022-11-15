@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    val kotlinVersion = "1.6.20"
+    val kotlinVersion = "1.7.20"
     id("java")
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
@@ -13,7 +13,6 @@ plugins {
 }
 
 group = "sun.flower"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -29,10 +28,13 @@ dependencies {
         exclude(module = "spring-aop")
     }
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-actuator") // for production metrics
 
     //memcached
     implementation("com.googlecode.xmemcached:xmemcached:2.4.7")
+    implementation("com.google.code.simple-spring-memcached:xmemcached-provider:4.1.3")
+    implementation("com.google.code.simple-spring-memcached:simple-spring-memcached:4.1.3")
 
 
     // tests
