@@ -1,5 +1,7 @@
 package sun.flower.resiliency;
 
+import java.net.InetSocketAddress;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,30 +11,25 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.code.ssm.config.DefaultAddressProvider;
-import com.google.code.ssm.providers.CacheClient;
-import com.google.code.ssm.providers.CacheConfiguration;
-import com.google.code.ssm.providers.xmemcached.MemcacheClientFactoryImpl;
+import net.spy.memcached.MemcachedClient;
 
 @Configuration
 @EnableConfigurationProperties
 public class ResiliencyConfiguration {
 
-    @Value("${memcached.servers:localhost:11211}")
-    private String hosts;
+    @Value("${memcached.ip}")
+    private String ip;
+    @Value("${memcached.port}")
+    private int port;
 
     private final Logger LOGGER = LoggerFactory.getLogger("Memcached");
 
     @Bean
-    public CacheClient memcachedClient() {
+    public MemcachedClient memcachedClient() {
         try {
-            final DefaultAddressProvider addressProvider = new DefaultAddressProvider();
-            addressProvider.setAddress(hosts);
-            final CacheConfiguration cacheConfiguration = new CacheConfiguration();
-            cacheConfiguration.setConsistentHashing(true);
-            return new MemcacheClientFactoryImpl().create(addressProvider.getAddresses(), cacheConfiguration);
+            return new MemcachedClient(new InetSocketAddress(ip, port));
         } catch (Exception e) {
-            LOGGER.error(String.format("Error with client: %s", hosts), e);
+            LOGGER.error(String.format("Error with client: %s:%s", ip, port), e);
             return null;
         }
     }
@@ -43,5 +40,4 @@ public class ResiliencyConfiguration {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
-
 }

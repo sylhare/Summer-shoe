@@ -1,9 +1,9 @@
 {
   "properties": [
     {
-      "name": "memcached.servers",
+      "name": "memcached",
       "type": "java.lang.String",
-      "description": "List of host for memcached."
+      "description": "List of configuration for memcached."
     }
   ]
 }

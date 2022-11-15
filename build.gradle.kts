@@ -32,8 +32,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator") // for production metrics
 
     //memcached
-    implementation("com.googlecode.xmemcached:xmemcached:2.4.7")
-    implementation("com.google.code.simple-spring-memcached:xmemcached-provider:4.1.3")
+    implementation("net.spy:spymemcached:2.12.3")
+    implementation("com.google.code.simple-spring-memcached:spymemcached-provider:4.1.3")
     implementation("com.google.code.simple-spring-memcached:simple-spring-memcached:4.1.3")
 
 
