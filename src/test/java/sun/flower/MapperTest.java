@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import sun.flower.model.Example;
-import sun.flower.resiliency.ResiliencyConfiguration;
+import sun.flower.cache.MemcachedConfiguration;
 
 public class MapperTest {
 
-    protected ObjectMapper objectMapper = new ResiliencyConfiguration().objectMapper();
+    protected ObjectMapper objectMapper = new MemcachedConfiguration().objectMapper();
     private final Example example = new Example("hello");
 
     @Test
