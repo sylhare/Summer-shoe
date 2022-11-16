@@ -1,4 +1,4 @@
-package sun.flower
+package sun.flower.endpoint
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper

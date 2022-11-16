@@ -22,6 +22,7 @@ import org.springframework.test.context.support.TestPropertySourceUtils
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import sun.flower.endpoint.Info
 import java.net.InetSocketAddress
 import java.net.URI
 
@@ -89,9 +90,9 @@ internal class AppTests {
     @Nested
     inner class Controller {
         @Test
-        fun infoTest() {
+        fun cacheTest() {
             val result = testRestTemplate.exchange(
-                URI(applicationUrl() + "/v1/info"),
+                URI(applicationUrl() + "/v1/cache"),
                 HttpMethod.GET,
                 HttpEntity(""),
                 Info::class.java
