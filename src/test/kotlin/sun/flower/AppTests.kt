@@ -81,7 +81,7 @@ internal class AppTests {
                 Void::class.java
             )
 
-            Assertions.assertEquals(HttpStatus.OK, result.statusCode)
+            assertEquals(HttpStatus.OK, result.statusCode)
         }
     }
 
@@ -94,9 +94,11 @@ internal class AppTests {
                 URI(applicationUrl() + "/v1/info"),
                 HttpMethod.GET,
                 HttpEntity(""),
-                Info::class.java)
+                Info::class.java
+            )
 
-            Assertions.assertEquals(HttpStatus.OK, result.statusCode)
+            assertEquals(HttpStatus.OK, result.statusCode)
+            assertEquals(Info.none, result.body)
         }
     }
 

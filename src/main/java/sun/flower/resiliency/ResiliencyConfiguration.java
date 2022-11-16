@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import net.spy.memcached.MemcachedClient;
 
 @Configuration
@@ -37,6 +38,7 @@ public class ResiliencyConfiguration {
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new KotlinModule.Builder().build());
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
