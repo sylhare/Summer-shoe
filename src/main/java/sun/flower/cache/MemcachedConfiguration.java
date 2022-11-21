@@ -50,6 +50,10 @@ public class MemcachedConfiguration implements CachingConfigurer {
         return new MemcachedClientConfiguration(RAINBOW_CACHE, String.format("%s:%s", host, port), 5000);
     }
 
+    /**
+     * To use the @Cacheable with the custom Memcached cache.
+     * @return Overridden Spring CacheManager
+     */
     @Override
     @Bean
     public CacheManager cacheManager() {
@@ -62,6 +66,10 @@ public class MemcachedConfiguration implements CachingConfigurer {
         }
     }
 
+    /**
+     * Object mapper compatible with Kotlin data class
+     * @return ObjectMapper
+     */
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();

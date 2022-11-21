@@ -14,7 +14,9 @@ import net.spy.memcached.ConnectionFactoryBuilder;
 import net.spy.memcached.MemcachedClient;
 import net.spy.memcached.transcoders.SerializingTranscoder;
 
-
+/**
+ * Spring Cache compatible Memcached implementation
+ */
 public class Memcached implements Cache {
 
     private final MemcachedClientConfiguration configuration;

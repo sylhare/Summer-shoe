@@ -1,5 +1,16 @@
 server:
   port: 8080
 
+logging:
+  level:
+    root: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: DOCKER
+
 memcached:
-  servers: localhost:11211
+  ip: s-memcached
+  port: 11211
