@@ -54,21 +54,6 @@ internal class AppTests {
 
     var testRestTemplate = TestRestTemplate()
 
-    @Test
-    fun setupTest() {
-        assertTrue(memcached.isRunning)
-        assertTrue(memcached.isHostAccessible)
-        assertEquals(listOf(11211), memcached.exposedPorts)
-        assertEquals("localhost", memcached.host)
-    }
-
-    @Test
-    fun cacheTest() {
-        val client = MemcachedClient(InetSocketAddress(memcached.host, memcached.firstMappedPort))
-        client.set("test", 5000, "value")
-        assertEquals(client.get("test"), "value")
-    }
-
     @Nested
     inner class Metrics {
 
