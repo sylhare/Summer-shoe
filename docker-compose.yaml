@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  s-memcached:
+    image: memcached:1.6.17-alpine
+    ports:
+      - "11211:11211"
+
+  s-app:
+    build:
+      context: .
+    ports:
+      - "8080:8081"
+    depends_on:
+      - s-memcached

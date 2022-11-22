@@ -34,8 +34,6 @@ dependencies {
 
     //memcached
     implementation("net.spy:spymemcached:2.12.3")
-    implementation("com.google.code.simple-spring-memcached:spymemcached-provider:4.1.3")
-    implementation("com.google.code.simple-spring-memcached:simple-spring-memcached:4.1.3")
 
 
     // tests
