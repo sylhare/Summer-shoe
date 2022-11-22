@@ -86,6 +86,27 @@ internal class AppTests {
             assertEquals(HttpStatus.OK, result.statusCode)
             assertEquals(Info.none, result.body)
         }
+
+        @Test
+        fun cacheableTest() {
+            val result = testRestTemplate.exchange(
+                URI(applicationUrl() + "/v1/cacheable"),
+                HttpMethod.GET,
+                HttpEntity(""),
+                Info::class.java
+            )
+            repeat(5) {
+                testRestTemplate.exchange(
+                    URI(applicationUrl() + "/v1/cacheable"),
+                    HttpMethod.GET,
+                    HttpEntity(""),
+                    Info::class.java
+                )
+            }
+
+            assertEquals(HttpStatus.OK, result.statusCode)
+            assertEquals(Info("goldy"), result.body)
+        }
     }
 
     private fun applicationUrl() = "http://localhost:$applicationPort"

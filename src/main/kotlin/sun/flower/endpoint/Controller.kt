@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import sun.flower.LOGGER
+import sun.flower.service.RainbowService
 
 @RestController
 @RequestMapping("/v1")
@@ -20,6 +21,9 @@ class Controller {
     @Autowired
     lateinit var objectMapper: ObjectMapper
 
+    @Autowired
+    lateinit var rainbowService: RainbowService
+
     @GetMapping(value = ["/cache"], produces = ["application/json"])
     fun cache(): ResponseEntity<Info> {
         cacheClient.set("1", 5000, objectMapper.writeValueAsString(Info.none))
@@ -28,5 +32,12 @@ class Controller {
         val mappedValue = objectMapper.readValue<Info>(value)
         LOGGER.info("Mapped value $mappedValue")
         return ResponseEntity(mappedValue, HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/cacheable"], produces = ["application/json"])
+    fun cacheable(): ResponseEntity<Info> {
+        val value = rainbowService.shine("goldy")
+        LOGGER.info("Cacheable value $value")
+        return ResponseEntity(objectMapper.readValue<Info>(value), HttpStatus.OK)
     }
 }
