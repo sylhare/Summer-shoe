@@ -1,7 +1,9 @@
+package sun.flower.cache
+
+import KGenericContainer
 import net.spy.memcached.MemcachedClient
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
