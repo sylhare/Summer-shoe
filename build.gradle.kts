@@ -25,7 +25,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     //springboot
-    implementation("org.springframework.boot:spring-boot-starter"){
+    implementation("org.springframework.boot:spring-boot-starter") {
         exclude(module = "spring-aop")
     }
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -35,15 +35,16 @@ dependencies {
     //memcached
     implementation("net.spy:spymemcached:2.12.3")
 
+    //resilient4j
+    implementation("io.github.resilience4j:resilience4j-retry:1.7.1")
+    implementation("io.github.resilience4j:resilience4j-circuitbreaker:1.7.1")
 
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(module = "junit")
-        exclude(module = "junit-vintage-engine")
         exclude(module = "mockito-core")
     }
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
     testImplementation("org.testcontainers:testcontainers:1.17.5")
     testImplementation("org.testcontainers:junit-jupiter:1.17.5")
 }
