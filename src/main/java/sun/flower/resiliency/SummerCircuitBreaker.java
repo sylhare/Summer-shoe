@@ -1,7 +1,6 @@
 package sun.flower.resiliency;
 
 import java.time.Duration;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -49,10 +48,10 @@ public class SummerCircuitBreaker {
     }
 
     public <T> T run(Class<T> expectedClass, String id, Supplier<T> supplier) {
-        CheckedFunction0<T> decoratedCircuitBreaker = CircuitBreaker
-                .decorateCheckedSupplier(this.circuitBreaker, supplier::get);
+        Supplier<T> decoratedSupplier = CircuitBreaker
+                .decorateSupplier(circuitBreaker, supplier);
         CheckedFunction0<T> decoratedRetry = Retry
-                .decorateCheckedSupplier(this.retry, decoratedCircuitBreaker);
+                .decorateCheckedSupplier(this.retry, decoratedSupplier::get);
         return Try.of(decoratedRetry)
                 .onSuccess(storeInCache(id))
                 .recover(getFromCache(id, expectedClass)).get();

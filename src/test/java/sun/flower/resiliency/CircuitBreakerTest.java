@@ -1,14 +1,11 @@
 package sun.flower.resiliency;
 
-
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.GenericContainer;
@@ -51,15 +48,18 @@ public class CircuitBreakerTest {
     @Test
     public void onFailureRetrieve() {
         Example result1 = summerCircuitBreaker.run(Example.class, "flaky", () -> new Example("service"));
-        Example result2 = summerCircuitBreaker.run(Example.class, "flaky", () -> { throw new RuntimeException(); });
+        Example result2 = summerCircuitBreaker.run(Example.class, "flaky", () -> {
+            throw new RuntimeException();
+        });
         assertEquals(new Example("service"), result1);
         assertEquals(new Example("service"), result2);
     }
 
     @Test
     public void onCacheMissNull() {
-        Example result = summerCircuitBreaker.run(Example.class, "null", () -> { throw new RuntimeException(); });
+        Example result = summerCircuitBreaker.run(Example.class, "null", () -> {
+            throw new RuntimeException();
+        });
         assertNull(result);
     }
-
 }
