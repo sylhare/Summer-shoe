@@ -40,9 +40,7 @@ dependencies {
     implementation("io.github.resilience4j:resilience4j-circuitbreaker:1.7.1")
 
     // tests
-    testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(module = "mockito-core")
-    }
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
     testImplementation("org.testcontainers:testcontainers:1.17.5")

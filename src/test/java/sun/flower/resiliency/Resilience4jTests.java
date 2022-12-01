@@ -82,7 +82,7 @@ public class Resilience4jTests {
         public String retry(Supplier<String> supplier) {
             CheckedFunction0<String> retryableSupplier = Retry.decorateCheckedSupplier(this.retry, supplier::get);
             return Try.of(retryableSupplier)
-                    .recover((throwable) -> "Recover function when the retry failed").get();
+                    .recover(throwable -> "Recover function when the retry failed").get();
         }
 
         public String runWithCircuitBreaker(Supplier<String> supplier) {
