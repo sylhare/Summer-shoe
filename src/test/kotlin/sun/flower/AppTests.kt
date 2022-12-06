@@ -21,6 +21,7 @@ import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import sun.flower.endpoint.Info
+import sun.flower.model.Example
 import java.net.URI
 
 
@@ -103,6 +104,19 @@ internal class AppTests {
 
             assertEquals(HttpStatus.OK, result.statusCode)
             assertEquals(Info("goldy"), result.body)
+        }
+
+        @Test
+        fun circuitBreakableTest() {
+            val result = testRestTemplate.exchange(
+                URI(applicationUrl() + "/v1/circuitBreakable"),
+                HttpMethod.GET,
+                HttpEntity(""),
+                Example::class.java
+            )
+
+            assertEquals(HttpStatus.OK, result.statusCode)
+            assertEquals(Example("hello"), result.body)
         }
     }
 

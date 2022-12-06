@@ -18,4 +18,9 @@ public class Example {
     public boolean equals(Object any) {
         return any == this || any instanceof Example && Objects.equals(((Example) any).name, this.name);
     }
+
+    @Override
+    public String toString() {
+        return "Example=[name=" + name + "]";
+    }
 }

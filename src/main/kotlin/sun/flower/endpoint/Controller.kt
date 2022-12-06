@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import sun.flower.LOGGER
+import sun.flower.model.Example
+import sun.flower.service.CloudyService
 import sun.flower.service.RainbowService
 
 @RestController
@@ -23,6 +25,9 @@ class Controller {
 
     @Autowired
     lateinit var rainbowService: RainbowService
+
+    @Autowired
+    lateinit var cloudyService: CloudyService
 
     @GetMapping(value = ["/cache"], produces = ["application/json"])
     fun cache(): ResponseEntity<Info> {
@@ -39,5 +44,12 @@ class Controller {
         val value = rainbowService.shine("goldy")
         LOGGER.info("Cacheable value $value")
         return ResponseEntity(objectMapper.readValue<Info>(value), HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/circuitBreakable"], produces = ["application/json"])
+    fun circuitBreakable(): ResponseEntity<Example?> {
+        val value = cloudyService.shine("id")
+        LOGGER.info("Circuit Breaker value $value")
+        return ResponseEntity(value, HttpStatus.OK)
     }
 }
