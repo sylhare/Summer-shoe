@@ -59,11 +59,13 @@ public class SummerCircuitBreaker {
 
     private <T> Consumer<T> storeInCache(String id) {
         return result -> Try.of(() -> cacheClient.set(id, TTL_1_DAY, objectMapper.writeValueAsString(result)))
+                .onSuccess(success -> LOGGER.info(String.format("Successfully fetched %s, now storing %s", id, result)))
                 .onFailure(throwable -> LOGGER.error("Could not store in cache", throwable));
     }
 
     private <T> Function<Throwable, T> getFromCache(String id, Class<T> expectedClass) {
         return throwable -> Try.of(() -> objectMapper.readValue((String) cacheClient.get(id), expectedClass))
+                .onSuccess(success -> LOGGER.info(String.format("Getting %s from cache", id)))
                 .onFailure(exception -> LOGGER.error("Could not retrieve from cache", exception))
                 .recover(fromCache -> null)
                 .get();

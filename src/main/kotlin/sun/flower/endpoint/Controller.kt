@@ -52,4 +52,12 @@ class Controller {
         LOGGER.info("Circuit Breaker value $value")
         return ResponseEntity(value, HttpStatus.OK)
     }
+
+    @GetMapping(value = ["/circuitBreakableWithCache"], produces = ["application/json"])
+    fun circuitBreakableWithCache(): ResponseEntity<Example?> {
+        cloudyService.shine("id") // will make it work once and cache
+        cloudyService.veryCloudy() // will make it fail
+        val value = cloudyService.shine("id") // will use the cache
+        return ResponseEntity(value, HttpStatus.OK)
+    }
 }

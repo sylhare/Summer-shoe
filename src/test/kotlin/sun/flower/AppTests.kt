@@ -69,7 +69,6 @@ internal class AppTests {
         }
     }
 
-
     @Nested
     inner class Controller {
         @Test
@@ -110,6 +109,19 @@ internal class AppTests {
         fun circuitBreakableTest() {
             val result = testRestTemplate.exchange(
                 URI(applicationUrl() + "/v1/circuitBreakable"),
+                HttpMethod.GET,
+                HttpEntity(""),
+                Example::class.java
+            )
+
+            assertEquals(HttpStatus.OK, result.statusCode)
+            assertEquals(Example("hello"), result.body)
+        }
+
+        @Test
+        fun circuitBreakableWithCacheTest() {
+            val result = testRestTemplate.exchange(
+                URI(applicationUrl() + "/v1/circuitBreakableWithCache"),
                 HttpMethod.GET,
                 HttpEntity(""),
                 Example::class.java
