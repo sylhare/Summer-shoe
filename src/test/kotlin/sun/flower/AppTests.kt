@@ -1,9 +1,7 @@
 package sun.flower
 
 import KGenericContainer
-import net.spy.memcached.MemcachedClient
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -23,7 +21,6 @@ import org.testcontainers.containers.GenericContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import sun.flower.endpoint.Info
-import java.net.InetSocketAddress
 import java.net.URI
 
 
@@ -89,14 +86,14 @@ internal class AppTests {
 
         @Test
         fun cacheableTest() {
-            val result = testRestTemplate.exchange(
+            var result = testRestTemplate.exchange(
                 URI(applicationUrl() + "/v1/cacheable"),
                 HttpMethod.GET,
                 HttpEntity(""),
                 Info::class.java
             )
             repeat(5) {
-                testRestTemplate.exchange(
+                result = testRestTemplate.exchange(
                     URI(applicationUrl() + "/v1/cacheable"),
                     HttpMethod.GET,
                     HttpEntity(""),

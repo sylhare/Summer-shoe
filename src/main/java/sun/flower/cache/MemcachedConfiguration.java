@@ -33,6 +33,7 @@ public class MemcachedConfiguration implements CachingConfigurer {
 
     /**
      * For simple Memcached configuration
+     *
      * @return net.spy.memcached.MemcachedClient
      */
     @Bean
@@ -52,6 +53,7 @@ public class MemcachedConfiguration implements CachingConfigurer {
 
     /**
      * To use the @Cacheable with the custom Memcached cache.
+     *
      * @return Overridden Spring CacheManager
      */
     @Override
@@ -68,6 +70,7 @@ public class MemcachedConfiguration implements CachingConfigurer {
 
     /**
      * Object mapper compatible with Kotlin data class
+     *
      * @return ObjectMapper
      */
     @Bean

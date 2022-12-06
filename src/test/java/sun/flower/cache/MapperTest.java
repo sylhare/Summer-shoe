@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import sun.flower.model.Example;
-import sun.flower.cache.MemcachedConfiguration;
 
 public class MapperTest {
 
