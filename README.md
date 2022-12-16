@@ -16,3 +16,8 @@ Run the app
 ```bash
 ./gradlew bootRun
 ```
+
+### Features
+
+- Resilient4j Retry and CircuitBreaker
+- Memcached Cache
