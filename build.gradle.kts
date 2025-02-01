@@ -36,7 +36,7 @@ dependencies {
     implementation("net.spy:spymemcached:2.12.3")
 
     //resilient4j
-    implementation("io.github.resilience4j:resilience4j-retry:1.7.1")
+    implementation("io.github.resilience4j:resilience4j-retry:2.3.0")
     implementation("io.github.resilience4j:resilience4j-circuitbreaker:1.7.1")
 
     // tests
