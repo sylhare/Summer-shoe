@@ -44,7 +44,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.11.4")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
     testImplementation("org.testcontainers:testcontainers:1.20.6")
-    testImplementation("org.testcontainers:junit-jupiter:1.20.6")
+    testImplementation("org.testcontainers:junit-jupiter:1.21.0")
 }
 
 tasks.getByName<Test>("test") {
