@@ -16,7 +16,6 @@ import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.core.IntervalFunction;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
-import io.vavr.CheckedFunction0;
 import io.vavr.control.Try;
 import net.spy.memcached.MemcachedClient;
 
@@ -50,9 +49,9 @@ public class SummerCircuitBreaker {
     public <T> T run(Class<T> expectedClass, String id, Supplier<T> supplier) {
         Supplier<T> decoratedSupplier = CircuitBreaker
                 .decorateSupplier(circuitBreaker, supplier);
-        CheckedFunction0<T> decoratedRetry = Retry
-                .decorateCheckedSupplier(this.retry, decoratedSupplier::get);
-        return Try.of(decoratedRetry)
+        Supplier<T> decoratedRetry = Retry
+                .decorateSupplier(this.retry, decoratedSupplier);
+        return Try.of(decoratedRetry::get)
                 .onSuccess(storeInCache(id))
                 .recover(getFromCache(id, expectedClass)).get();
     }

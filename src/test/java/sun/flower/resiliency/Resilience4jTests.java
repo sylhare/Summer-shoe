@@ -14,7 +14,6 @@ import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.core.IntervalFunction;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
-import io.vavr.CheckedFunction0;
 import io.vavr.control.Try;
 
 public class Resilience4jTests {
@@ -80,8 +79,8 @@ public class Resilience4jTests {
                         .build());
 
         public String retry(Supplier<String> supplier) {
-            CheckedFunction0<String> retryableSupplier = Retry.decorateCheckedSupplier(this.retry, supplier::get);
-            return Try.of(retryableSupplier)
+            Supplier<String> retryableSupplier = Retry.decorateSupplier(this.retry, supplier);
+            return Try.of(retryableSupplier::get)
                     .recover(throwable -> "Recover function when the retry failed").get();
         }
 
