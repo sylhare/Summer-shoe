@@ -5,7 +5,7 @@ plugins {
     id("java")
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.4.5"
+    id("org.springframework.boot") version "4.0.1"
     id("io.spring.dependency-management") version "1.1.7"
     id("jacoco")
     `maven-publish`
@@ -44,6 +44,8 @@ dependencies {
 
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-resttestclient")
+    testRuntimeOnly("org.springframework.boot:spring-boot-restclient")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.testcontainers:testcontainers")
