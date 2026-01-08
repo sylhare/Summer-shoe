@@ -20,8 +20,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("tools.jackson.module:jackson-module-kotlin")
+    implementation("tools.jackson.core:jackson-databind")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     //springboot

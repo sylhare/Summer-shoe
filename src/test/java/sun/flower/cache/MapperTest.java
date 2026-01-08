@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import sun.flower.model.Example;
 
 public class MapperTest {
@@ -14,12 +13,12 @@ public class MapperTest {
     private final Example example = new Example("hello");
 
     @Test
-    public void serializeTest() throws JsonProcessingException {
+    public void serializeTest() {
         assertEquals("{\"name\":\"hello\"}", objectMapper.writeValueAsString(example));
     }
 
     @Test
-    public void deserializeTest() throws JsonProcessingException {
+    public void deserializeTest() {
         Example deserializedExample = objectMapper.readValue("{\"name\":\"hello\"}", Example.class);
         assertEquals(example.name, deserializedExample.name);
     }

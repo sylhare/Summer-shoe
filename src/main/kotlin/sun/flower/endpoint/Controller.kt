@@ -1,6 +1,6 @@
 package sun.flower.endpoint
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import tools.jackson.databind.ObjectMapper
 import net.spy.memcached.MemcachedClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -47,14 +47,14 @@ class Controller {
     }
 
     @GetMapping(value = ["/circuitBreakable"], produces = ["application/json"])
-    fun circuitBreakable(): ResponseEntity<Example?> {
+    fun circuitBreakable(): ResponseEntity<Example> {
         val value = cloudyService.shine("id")
         LOGGER.info("Circuit Breaker value $value")
         return ResponseEntity(value, HttpStatus.OK)
     }
 
     @GetMapping(value = ["/circuitBreakableWithCache"], produces = ["application/json"])
-    fun circuitBreakableWithCache(): ResponseEntity<Example?> {
+    fun circuitBreakableWithCache(): ResponseEntity<Example> {
         cloudyService.shine("id") // will make it work once and cache
         cloudyService.veryCloudy() // will make it fail
         val value = cloudyService.shine("id") // will use the cache
