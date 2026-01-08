@@ -36,11 +36,11 @@ dependencies {
     implementation("net.spy:spymemcached:2.12.3")
 
     //resilient4j
-    implementation("io.github.resilience4j:resilience4j-retry:2.0.2")
-    implementation("io.github.resilience4j:resilience4j-circuitbreaker:2.0.2")
+    implementation("io.github.resilience4j:resilience4j-retry:2.3.0")
+    implementation("io.github.resilience4j:resilience4j-circuitbreaker:2.3.0")
     
     // vavr - needed for resilience4j circuit breaker implementation
-    implementation("io.vavr:vavr:0.10.7")
+    implementation("io.vavr:vavr:0.11.0")
 
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -48,8 +48,8 @@ dependencies {
     testRuntimeOnly("org.springframework.boot:spring-boot-restclient")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("org.testcontainers:testcontainers")
-    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:testcontainers:1.21.4")
+    testImplementation("org.testcontainers:junit-jupiter:1.21.4")
 }
 
 tasks.getByName<Test>("test") {
