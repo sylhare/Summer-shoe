@@ -48,8 +48,8 @@ dependencies {
     testRuntimeOnly("org.springframework.boot:spring-boot-restclient")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testImplementation("org.testcontainers:testcontainers:1.21.4")
-    testImplementation("org.testcontainers:junit-jupiter:1.21.4")
+    testImplementation("org.testcontainers:testcontainers:2.0.3")
+    testImplementation("org.testcontainers:junit-jupiter:2.0.3")
 }
 
 tasks.getByName<Test>("test") {
