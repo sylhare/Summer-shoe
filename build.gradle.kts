@@ -36,8 +36,8 @@ dependencies {
     implementation("net.spy:spymemcached:2.12.3")
 
     //resilient4j
-    implementation("io.github.resilience4j:resilience4j-retry:2.3.0")
-    implementation("io.github.resilience4j:resilience4j-circuitbreaker:2.3.0")
+    implementation("io.github.resilience4j:resilience4j-retry:2.4.0")
+    implementation("io.github.resilience4j:resilience4j-circuitbreaker:2.4.0")
     
     // vavr - needed for resilience4j circuit breaker implementation
     implementation("io.vavr:vavr:1.0.1")
