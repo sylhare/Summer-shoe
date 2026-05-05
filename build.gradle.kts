@@ -33,7 +33,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator") // for production metrics
 
     //memcached
-    implementation("net.spy:spymemcached:2.12.3")
+    implementation("com.amazonaws:elasticache-java-cluster-client:1.2.3")
 
     //resilient4j
     implementation("io.github.resilience4j:resilience4j-retry:2.4.0")
