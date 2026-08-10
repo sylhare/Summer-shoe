@@ -21,7 +21,7 @@ class CloudyService {
 
     fun callExternal(): Example {
         val isCloudy = this.isCloudy();
-        LOGGER.info("Calling API - will succeed: ${!isCloudy}}")
+        LOGGER.info("Calling API - will succeed: ${!isCloudy}")
         return when (isCloudy) {
             true -> throw RuntimeException("Not working")
             false -> Example("hello")
