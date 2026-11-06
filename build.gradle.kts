@@ -40,7 +40,7 @@ dependencies {
     implementation("io.github.resilience4j:resilience4j-circuitbreaker:2.4.0")
     
     // vavr - needed for resilience4j circuit breaker implementation
-    implementation("io.vavr:vavr:1.0.1")
+    implementation("io.vavr:vavr:1.1.0")
 
     // tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
